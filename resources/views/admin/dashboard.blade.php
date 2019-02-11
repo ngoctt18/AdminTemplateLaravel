@@ -1,0 +1,1 @@
+<h2>This is dashboard.blade.php of {{ isset($url) ? ucwords($url) : "??"}}</h2>

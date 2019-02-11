@@ -17,8 +17,16 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        // Chuyển hướng khi đã đăng nhập rồi
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            switch($guard){
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                case 'writer':
+                    return redirect()->route('writer.dashboard');
+                default:
+                    return redirect()->route('home');
+            }
         }
 
         return $next($request);

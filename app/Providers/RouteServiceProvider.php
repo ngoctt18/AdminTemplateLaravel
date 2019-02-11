@@ -39,7 +39,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapAdminRoutes();
         //
+        $this->mapWriterRoutes();
     }
 
     /**
@@ -54,6 +56,32 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::middleware('web')
+             // Đường dẫn thư mục
+             ->namespace($this->namespace.'\Admin')
+             // Thêm tiền tố cho name route
+             ->name('admin.')
+             // Thêm tiền tố cho URL 
+             ->prefix('admin')
+             // File route đích
+             ->group(base_path('routes/admin.php'));
+    }
+
+    protected function mapWriterRoutes()
+    {
+        Route::middleware('web')
+             // Đường dẫn thư mục
+             ->namespace($this->namespace.'\Writer')
+             // Thêm tiền tố cho name route
+             ->name('writer.')
+             // Thêm tiền tố cho URL 
+             ->prefix('writer')
+             // File route đích
+             ->group(base_path('routes/writer.php'));
     }
 
     /**

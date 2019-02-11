@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\Writer\CreateWriterRequest;
+
+use App\User;
+use App\Admin;
+use App\Writer;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -38,6 +44,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:admin');
+        $this->middleware('guest:writer');
     }
 
     /**
@@ -68,5 +76,19 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showWriterRegisterForm()
+    {
+        // return view('auth.register', ['url' => 'writer']);
+    }
+    
+    protected function createWriter(CreateWriterRequest $request)
+    {
+        // $this->validator($request->all())->validate();
+        // dd($request->all());
+        $writer = Writer::create($request->all());
+        Session::flash('success', 'Đăng ký thành công. Vui lòng đăng nhập.');
+        return redirect()->route('writer.login');
     }
 }

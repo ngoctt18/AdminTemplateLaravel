@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\Admin\LoginAdminRequest;
+use App\Http\Requests\Writer\LoginWriterRequest;
+use Illuminate\Http\Request;
+use Auth;
+use Session;
 
 class LoginController extends Controller
 {
