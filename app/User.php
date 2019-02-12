@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'phone', 'images', 'address', 'status', 'email', 'password',
+        'name', 'username', 'phone', 'images', 'address', 'status', 'email', 'password', 'verified'
     ];
 
     /**
@@ -27,4 +27,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    // Defining A Mutator
+    public function setPasswordAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    // Defining An Accessor
+
+
+    // Relationships
+    public function orders(){
+        return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
 }

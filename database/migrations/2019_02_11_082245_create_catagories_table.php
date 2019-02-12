@@ -16,6 +16,8 @@ class CreateCatagoriesTable extends Migration
         Schema::create('catagories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
+            $table->text('description')->nullable();
             $table->unsignedInteger('catagory_type_id');
             $table->foreign('catagory_type_id')->references('id')->on('catagories_types')->onDelete('cascade');
             $table->enum('status', [0, 1])->default(1);

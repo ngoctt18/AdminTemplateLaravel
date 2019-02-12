@@ -17,8 +17,10 @@ class CreateDistributionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->unsignedInteger('catagory_id');
-            $table->foreign('catagory_id')->references('id')->on('catagories')->onDelete('cascade');
+            $table->string('email')->unique()->nullable();
+            $table->string('phone')->unique()->nullable();
+            $table->string('address')->nullable();
+            $table->text('description')->nullable();
             $table->enum('status',[0, 1])->default(1);
             // 0: Ẩn, 1: Hiển thị
             $table->timestamps();

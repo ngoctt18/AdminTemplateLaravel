@@ -17,9 +17,16 @@ Auth::routes();
 Route::middleware(['auth:admin'])->group(function(){
 	Route::get('dashboard', 'DashboardController@admin')->name('dashboard');
 	Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+	// 
+
+
+
 });
 
 
-Route::get('login', 'Auth\LoginController@showAdminLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@adminLogin');
+Route::middleware(['guest:admin'])->group(function(){
+	Route::get('login', 'Auth\LoginController@showAdminLoginForm')->name('login');
+	Route::post('login', 'Auth\LoginController@adminLogin');
 
+});

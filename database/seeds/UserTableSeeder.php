@@ -30,5 +30,7 @@ class UserTableSeeder extends Seeder
     		'password' => '12345678',
     		'address' => 'Quảng Ninh',
     	]);
+        
+        factory(User::class, 15)->create();
     }
 }

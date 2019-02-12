@@ -20,7 +20,13 @@ class Admin extends Authenticatable
 		'password', 'remember_token',
 	];
 
+	// Defining A Mutator
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);
     }
+
+    // Defining An Accessor
+
+
+    // Relationships
 }

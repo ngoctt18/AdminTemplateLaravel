@@ -22,5 +22,7 @@ class WriterTableSeeder extends Seeder
     		'verified' => true,
     		'status' => 1,
     	]);
+        
+        // factory(Writer::class, 2)->create();
     }
 }
